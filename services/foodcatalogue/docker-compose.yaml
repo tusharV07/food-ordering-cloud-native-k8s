@@ -1,0 +1,8 @@
+services:
+  foodcatalogue:
+    image: foodcatalogue:latest
+    build: .
+    ports:
+      - "9092:9092"
+    environment:
+      DB_PWD: ${DB_PWD}

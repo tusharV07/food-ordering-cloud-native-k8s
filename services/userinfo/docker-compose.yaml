@@ -1,0 +1,8 @@
+services:
+  userservice:
+    image: userservice:latest
+    build: .
+    ports:
+      - "9093:9093"
+    environment:
+      DB_PWD: ${DB_PWD}

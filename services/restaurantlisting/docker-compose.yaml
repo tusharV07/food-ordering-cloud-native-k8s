@@ -1,0 +1,8 @@
+services:
+  restaurantlisting:
+    image: restaurantlisting:latest
+    build: .
+    ports:
+      - "9091:9091"
+    environment:
+      DB_PWD: ${DB_PWD}

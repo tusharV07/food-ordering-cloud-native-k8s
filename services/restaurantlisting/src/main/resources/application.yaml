@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: restaurant-service
+  datasource:
+    hikari:
+      pool-name: RestaurantListingHikariCP
+      minimum-idle: 3
+      maximum-pool-size: 10
+      connection-timeout: 10000
+      idle-timeout: 600000
+      max-lifetime: 1700000
+    #url: jdbc:mysql://localhost:3306/restaurantdb
+    url: jdbc:mysql://host.docker.internal:3306/restaurantdb
+    username: root
+    password: ${DB_PWD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics"
+    
+    
+server:
+  port: 9091
+
+eureka:
+  client:
+    service-url:
+      #defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eurekaservice:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true

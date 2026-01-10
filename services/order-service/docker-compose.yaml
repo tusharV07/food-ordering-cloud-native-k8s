@@ -1,0 +1,6 @@
+services:
+  order-service:
+    image: order-service:latest
+    build: .
+    ports:
+      - "9094:9094"

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: Eureka
+server:
+  port: 8761
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics"
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false

@@ -1,0 +1,6 @@
+services:
+  eurekaservice:
+    image: eurekaservice:latest
+    build: .
+    ports:
+      - "8761:8761"
