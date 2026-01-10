@@ -1,6 +1,6 @@
 services:
-  userservice:
-    image: userservice:latest
+  userinfofd:
+    image: tusharvyavahare/userinfo-service:0.0.1
     build: .
     ports:
       - "9093:9093"

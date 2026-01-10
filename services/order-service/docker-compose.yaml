@@ -1,6 +1,6 @@
 services:
-  order-service:
-    image: order-service:latest
+  orderfd:
+    image: tusharvyavahare/order-service:0.0.1
     build: .
     ports:
       - "9094:9094"

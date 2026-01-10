@@ -1,6 +1,6 @@
 services:
-  foodcatalogue:
-    image: foodcatalogue:latest
+  foodcataloguefd:
+    image: tusharvyavahare/foodcatalogue-service:0.0.1
     build: .
     ports:
       - "9092:9092"

@@ -1,0 +1,7 @@
+services:
+  frontend:
+    image: tusharvyavahare/food-delivery-frontend:0.0.1
+    container_name: food-delivery-frontend
+    ports:
+      - "4200:80"
+    restart: unless-stopped
