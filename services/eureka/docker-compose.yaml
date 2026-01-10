@@ -1,6 +1,6 @@
 services:
-  eurekaservice:
-    image: eurekaservice:latest
+  eurekafd:
+    image: tusharvyavahare/eureka-server:0.0.1
     build: .
     ports:
       - "8761:8761"

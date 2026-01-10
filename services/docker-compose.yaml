@@ -1,6 +1,6 @@
 services:
-  eurekaservice:
-    image: eurekaservice:latest
+  eurekafd:
+    image: tusharvyavahare/eureka-server:0.0.1
     build: .\eureka
     ports:
       - "8761:8761"
@@ -10,44 +10,44 @@ services:
       timeout: 5s
       retries: 3
 
-  foodcatalogue:
-    image: foodcatalogue:latest
+  foodcataloguefd:
+    image: tusharvyavahare/foodcatalogue-service:0.0.1
     build: .\foodcatalogue
     ports:
       - "9092:9092"
     environment:
       DB_PWD: ${DB_PWD}
     depends_on:
-      eurekaservice:
+      eurekafd:
         condition: service_healthy
 
-  order-service:
-    image: order-service:latest
+  orderfd:
+    image: tusharvyavahare/order-service:0.0.1
     build: .\order-service
     ports:
       - "9094:9094"
     depends_on:
-      eurekaservice:
+      eurekafd:
         condition: service_healthy
 
-  restaurantlisting:
-    image: restaurantlisting:latest
+  restaurantlistingfd:
+    image: tusharvyavahare/restaurantlisting-service:0.0.1
     build: .\restaurantlisting
     ports:
       - "9091:9091"
     environment:
       DB_PWD: ${DB_PWD}
     depends_on:
-      eurekaservice:
+      eurekafd:
         condition: service_healthy
 
-  userservice:
-    image: userservice:latest
+  userinfofd:
+    image: tusharvyavahare/userinfo-service:0.0.1
     build: .\userinfo
     ports:
       - "9093:9093"
     environment:
       DB_PWD: ${DB_PWD}
     depends_on:
-      eurekaservice:
+      eurekafd:
         condition: service_healthy

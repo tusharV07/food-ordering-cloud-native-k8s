@@ -1,8 +1,9 @@
 services:
-  restaurantlisting:
-    image: restaurantlisting:latest
+  restaurantlistingfd:
+    image: tusharvyavahare/restaurantlisting-service:0.0.1
     build: .
     ports:
       - "9091:9091"
     environment:
       DB_PWD: ${DB_PWD}
+    restart: unless-stopped
