@@ -14,3 +14,15 @@ eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
+    
+
+#eureka:
+  #instance:
+    #hostname: ${HOSTNAME} # Resolves to 'eureka-0', 'eureka-1', etc.
+  #client:
+    #register-with-eureka: true #true to sync with peers
+    #fetch-registry: true
+    #service-url:
+      # list of fixed services
+      #defaultZone: http://eureka-0.eureka-service.default.svc.cluster.local:8761/eureka,http://eureka-1.eureka-service.default.svc.cluster.local:8761/eureka,http://eureka-2.eureka-service.default.svc.cluster.local:8761/eureka
+      

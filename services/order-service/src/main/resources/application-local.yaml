@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://host.docker.internal:27017/orderdb
+      host: host.docker.internal
+      port: 27017
+      database: orderdb
+
+eureka:
+  client:
+    service-url:
+      #defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eurekafd:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
