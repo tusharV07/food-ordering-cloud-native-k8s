@@ -1,12 +1,8 @@
 spring:
   application:
     name: order-service
-  data:
-    mongodb:
-      uri: mongodb://host.docker.internal:27017/orderdb
-      host: host.docker.internal
-      port: 27017
-      database: orderdb
+  profiles:
+    active: dev
     
 server:
   port: 9094
@@ -16,11 +12,3 @@ management:
     web:
       exposure:
         include: "health,info,metrics"
-
-eureka:
-  client:
-    service-url:
-      #defaultZone: http://localhost:8761/eureka/
-      defaultZone: http://eurekafd:8761/eureka/
-    fetch-registry: true
-    register-with-eureka: true
