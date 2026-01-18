@@ -5,7 +5,13 @@ target/
 !**/src/test/**/target/
 
 .env
-.env.*
+.env-*
+
+secret*.yml
+secret*.yaml
+configmap*.yml
+configmap*.yaml
+
 
 ### STS ###
 .apt_generated
