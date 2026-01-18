@@ -18,14 +18,9 @@ import lombok.RequiredArgsConstructor;
 public class OrderService {
 	private final OrderRepo orderRepo;
 	private final SequenceGenerator sequenceGen;
-	private final WebClient.Builder webClientBuilder;
 	private final OrderMapper orderMapper;
-	private WebClient webClient;
+	private final WebClient webClient;
 	
-	@PostConstruct
-	private void init() {
-		webClient=webClientBuilder.baseUrl("http://USERINFORMATION").build();
-	}
 
 	public OrderResponseDTO saveOrder(OrderRequestDTO orderRequest) {
 		Long orderId=sequenceGen.getNextSequence();
@@ -39,7 +34,7 @@ public class OrderService {
 
 	private UserDTO fetchUserById(Integer userId) {
 		return webClient.get()
-				.uri("/api/v1/user/fetchUserById/"+userId)
+				.uri("http://USERINFORMATION/api/v1/user/fetchUserById/"+userId)
 				.retrieve()
 				.bodyToMono(UserDTO.class)
 				.block();
