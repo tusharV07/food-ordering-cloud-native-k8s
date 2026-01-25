@@ -1,0 +1,83 @@
+
+
+1. Jenkins builds/tests service and pushes Docker image
+2. Jenkins updates manifest in repo with new image tag
+3. ArgoCD detects Git change and syncs to EKS automatically
+4. Application runs with new version
+
+Install ArgoCD on EKS
+
+
+# Create namespace
+kubectl create namespace argocd
+
+# Install ArgoCD
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# Wait for pods
+kubectl wait --for=condition=Ready pods --all -n argocd --timeout=300s
+
+# # Get admin password
+# kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+
+
+# Port forward to access UI
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+# Login at https://localhost:8080
+# Username: admin
+# Password: <above pwd>
+
+
+
+ArgoCD needs SSH access to your GitOps repo:
+
+
+# Generate SSH key (if you don't have one)
+ssh-keygen -t ed25519 -C "argocd@foodapp" -f ~/.ssh/argocd_ed25519
+
+# Add public key to GitHub
+cat ~/.ssh/argocd_ed25519.pub
+# Go to GitHub repo → Settings → Deploy keys → Add deploy key (read-only is fine)
+
+# Add private key to ArgoCD
+use ArgoCD UI: **Settings → Repositories → Connect Repo Using SSH**
+- Repository URL: `git@github.com:tusharV07/food-ordering-cloud-native-k8s.git`
+- SSH private key: paste your private key
+
+## Deploy ArgoCD Applications
+
+Apply all application manifests:
+
+
+kubectl apply -f argocd/
+
+
+This creates ArgoCD applications for:
+- eureka-service
+- restaurantlisting-service
+- foodcatalogue-service
+- order-service
+- frontend
+
+## Application Configuration
+
+Each application:
+- **Watches**: `git@github.com:tusharV07/food-ordering-cloud-native-k8s.git` main branch
+- **Path**: `k8s/aws/<service-manifest>.yml`
+- **Destination**: EKS cluster, default namespace
+- **Auto-sync**: Enabled with prune and self-heal
+- **Retry**: 5 attempts with exponential backoff
+
+## Verify Deployment
+# List applications
+kubectl get applications -n argocd
+
+# Check app status
+argocd app list
+
+
+
+
+
